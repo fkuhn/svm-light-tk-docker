@@ -5,13 +5,14 @@ MAINTAINER Arne Neumann <nlpdocker.programming@arne.cl>
 
 RUN apt-get update && apt-get install -y gcc make wget unzip
 
-WORKDIR /opt
+WORKDIR /tmp
 RUN wget http://disi.unitn.it/moschitti/TK1.2-software/svm-light-TK-1.2.zip && \
     unzip svm-light-TK-1.2.zip && rm svm-light-TK-1.2.zip && \
     mv svm-light-TK-1.2/svm-light-TK-1.2.1 . && \
     rmdir svm-light-TK-1.2
+    cp -r svm-light-TK-1.2.1 ~
 
-WORKDIR /opt/svm-light-TK-1.2.1
+WORKDIR ~/svm-light-TK-1.2.1
 RUN make
 
 # add example data (containing PropBank Argument 0 as positive class
